@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <title>Student Result Calculator</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(135deg,
+                    #74ebd5,
+                    #9face6);
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+
+        .container {
+            width: 400px;
+            max-width: 100%;
+
+            background-color: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        h1 {
+            text-align: center;
+
+            font-size: 26px;
+
+            margin-bottom: 20px;
+
+            color: #333;
+        }
+
+
+
+        .form-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        label {
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+            margin-bottom: 5px;
+
+            color: #444;
+        }
+
+
+
+        input {
+            width: 100%;
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+        }
+
+
+
+        input:focus {
+            outline: none;
+
+            border-color: #667eea;
+
+            box-shadow:
+                0 0 5px rgba(102, 126, 234, 0.4);
+        }
+
+
+
+        button {
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background-color: #667eea;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+
+        button:hover {
+            background-color: #5367d8;
+        }
+
+        .result-box {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            background-color: #f4f6ff;
+
+            line-height: 1.7;
+
+            display: none;
+        }
+
+
+
+        .result-box h2 {
+            text-align: center;
+
+            margin-bottom: 10px;
+
+            color: #333;
+        }
+
+        .result-box hr {
+            margin: 10px 0;
+
+            border: none;
+
+            border-top: 1px solid #ccc;
+        }
+
+
+
+        .pass {
+            color: green;
+
+            font-weight: bold;
+        }
+
+
+
+        .fail {
+            color: red;
+
+            font-weight: bold;
+        }
+
+
+
+        .error {
+            color: red;
+
+            font-weight: bold;
+
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+
+    <div class="container">
+
+        <h1>Student Result Calculator</h1>
+
+
+        <div class="form-box">
+
+
+            <!-- Student Name -->
+            <label for="name">
+                Student Name
+            </label>
+
+            <input type="text" id="name" placeholder="Enter student name">
+
+
+
+            <label for="english">
+                English Marks
+            </label>
+
+            <input type="number" id="english" placeholder="Enter marks" min="0" max="100">
+
+
+
+            <label for="telugu">
+                Telugu Marks
+            </label>
+
+            <input type="number" id="telugu" placeholder="Enter marks" min="0" max="100">
+
+
+
+            <label for="hindi">
+                Hindi Marks
+            </label>
+
+            <input type="number" id="hindi" placeholder="Enter marks" min="0" max="100">
+
+
+
+            <label for="maths">
+                Maths Marks
+            </label>
+
+            <input type="number" id="maths" placeholder="Enter marks" min="0" max="100">
+
+
+
+            <label for="social">
+                Social Marks
+            </label>
+
+            <input type="number" id="social" placeholder="Enter marks" min="0" max="100">
+
+
+
+            <button onclick="calculateResult()">
+                Calculate Result
+            </button>
+
+        </div>
+
+
+
+        <div id="result" class="result-box"></div>
+
+    </div>
+
+
+
+
+
+    <script>
+
+
+        let passedStudents = 0;
+        let failedStudents = 0;
+
+
+        function calculateResult() {
+
+
+
+            let name =
+                document.getElementById("name").value.trim();
+
+
+
+            let english =
+                Number(document.getElementById("english").value);
+
+            let telugu =
+                Number(document.getElementById("telugu").value);
+
+            let hindi =
+                Number(document.getElementById("hindi").value);
+
+            let maths =
+                Number(document.getElementById("maths").value);
+
+            let social =
+                Number(document.getElementById("social").value);
+
+
+
+            let resultBox =
+                document.getElementById("result");
+
+
+
+            if (name === "") {
+
+                resultBox.style.display = "block";
+
+                resultBox.innerHTML = `
+                    <p class="error">
+                        Please enter student name.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+
+            let marks = [
+                english,
+                telugu,
+                hindi,
+                maths,
+                social
+            ];
+
+
+
+            for (let mark of marks) {
+
+                if (
+                    isNaN(mark) ||
+                    mark < 0 ||
+                    mark > 100
+                ) {
+
+                    resultBox.style.display = "block";
+
+                    resultBox.innerHTML = `
+                        <p class="error">
+                            Please enter marks between 0 and 100.
+                        </p>
+                    `;
+
+                    return;
+                }
+            }
+
+
+
+            let total =
+                english +
+                telugu +
+                hindi +
+                maths +
+                social;
+
+
+
+            let average =
+                total / 5;
+
+
+
+            let percentage =
+                (total / 500) * 100;
+
+
+
+            let result;
+            let grade;
+            if (
+                english >= 35 &&
+                telugu >= 35 &&
+                hindi >= 35 &&
+                maths >= 35 &&
+                social >= 35
+            ) {
+
+                result = "Pass";
+
+                passedStudents++;
+
+            } else {
+
+                result = "Fail";
+
+                failedStudents++;
+            }
+
+
+
+            if (result === "Fail") {
+
+                grade = "F";
+
+            }
+            else if (percentage >= 90) {
+
+                grade = "A+";
+
+            }
+            else if (percentage >= 80) {
+
+                grade = "A";
+
+            }
+            else if (percentage >= 70) {
+
+                grade = "B";
+
+            }
+            else if (percentage >= 60) {
+
+                grade = "C";
+
+            }
+            else if (percentage >= 50) {
+
+                grade = "D";
+
+            }
+            else {
+
+                grade = "F";
+            }
+
+
+
+            resultBox.style.display = "block";
+
+
+            resultBox.innerHTML = `
+
+                <h2>
+                    Student Result
+                </h2>
+
+
+                <p>
+                    <b>Student Name:</b>
+                    ${name}
+                </p>
+
+
+                <p>
+                    <b>English:</b>
+                    ${english}
+                </p>
+
+
+                <p>
+                    <b>Telugu:</b>
+                    ${telugu}
+                </p>
+
+
+                <p>
+                    <b>Hindi:</b>
+                    ${hindi}
+                </p>
+
+
+                <p>
+                    <b>Maths:</b>
+                    ${maths}
+                </p>
+
+
+                <p>
+                    <b>Social:</b>
+                    ${social}
+                </p>
+
+
+                <hr>
+
+
+                <p>
+                    <b>Total:</b>
+                    ${total} / 500
+                </p>
+
+
+                <p>
+                    <b>Average:</b>
+                    ${average.toFixed(2)}
+                </p>
+
+
+                <p>
+                    <b>Percentage:</b>
+                    ${percentage.toFixed(2)}%
+                </p>
+
+
+                <p>
+                    <b>Result:</b>
+
+                    <span class="${result === "Pass" ? "pass" : "fail"}">
+                        ${result}
+                    </span>
+                </p>
+
+
+                <p>
+                    <b>Grade:</b>
+                    ${grade}
+                </p>
+
+            `;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

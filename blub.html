@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bulb App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial;
+
+            background-color: #FFF3B0;
+            ;
+        }
+
+        .bulb-box {
+            width: 350px;
+            padding: 35px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.85);
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 32px;
+            color: #333;
+        }
+
+        #click {
+            font-size: 100px;
+            margin: 25px 0;
+        }
+
+        button {
+            font-size: 18px;
+            font-weight: bold;
+
+            padding: 10px 25px;
+            margin: 5px;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .on {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .off {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            opacity: 0.9;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bulb-box">
+
+        <h1>💡 Bulb App</h1>
+
+        <h2 id="click">🌑</h2>
+
+        <button class="on" onclick="turnon()">ON</button>
+
+        <button class="off" onclick="turnof()">OFF</button>
+
+    </div>
+
+    <script>
+
+        function turnon() {
+            document.getElementById("click").innerText = "💡";
+        }
+
+        function turnof() {
+            document.getElementById("click").innerText = "🌑";
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+
+    <style>
+        body {
+            
+
+            /* Background color */
+            background-color: lightblue;
+
+            /* Center everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h2>Login</h2>
+
+        <label>Username:</label>
+        <input type="text" id="username">
+
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" id="password">
+
+        <br><br>
+
+        <button id="loginbtn">Login</button>
+
+        <p id="message"></p>
+
+    </div>
+
+    <script>
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let loginbtn = document.getElementById("loginbtn");
+        let message = document.getElementById("message");
+
+        loginbtn.addEventListener("click", function() {
+
+            let user = username.value;
+            let pass = password.value;
+
+            if (user === "harika" && pass === "harry") {
+                localStorage.setItem("username", user);
+                message.innerHTML = "Login successful";
+            } else {
+                message.innerHTML = "Login unsuccessful";
+            }
+
+        });
+    </script>
+
+</body>
+</html>
+
